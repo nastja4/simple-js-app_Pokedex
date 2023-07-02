@@ -6,11 +6,14 @@ let pokemonList = [
     {name: 'Umbreon', attack: 65, defense: 110, types: ['dark']},
 ];
 
-for (let i = 0; i < pokemonList.length; i++) {    
-    if (pokemonList[i].attack > 80) {        
-        document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ') is the most powerful pokemon of ' + pokemonList.length + '<br />'); 
-        }
-        else {
-            document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ')<br/>');
-        }
+function printArrayDetails() {
+    for (let i = 0; i < pokemonList.length; i++) {    
+        if (pokemonList[i].attack > 80) {        
+            document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ') is the most powerful pokemon of ' + pokemonList.length + '<br />'); 
+            } else {
+                document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ')<br/>');
+            }
+    }
 }
+
+printArrayDetails();
