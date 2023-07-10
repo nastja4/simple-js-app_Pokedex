@@ -21,46 +21,58 @@
 
 
 
-let pokemonRepository = (function () {
+let pokemonRepository = (function() {
 
     let pokemonList = [
-        {name: 'Nidorino', attack: 72, defense: 57, types: ['poison']},
-        {name: 'Ponyta', attack: 85, defense: 55, types: ['fire']},
-        {name: 'Onix', attack: 45, defense: 160, types: ['rock', 'ground']},
-        {name: 'Starmie', attack: 75, defense: 85, types: ['water', 'psychic']},
-        {name: 'Umbreon', attack: 65, defense: 110, types: ['dark']}
+        {name: "Nidorino", attack: 72, defense: 57, types: ["poison"]},
+        {name: "Ponyta", attack: 85, defense: 55, types: ["fire"]},
+        {name: "Onix", attack: 45, defense: 160, types: ["rock", "ground"]},
+        {name: "Starmie", attack: 75, defense: 85, types: ["water", "psychic"]},
+        {name: "Umbreon", attack: 65, defense: 110, types: ["dark"]}
     ]
 
     function getAll () {
         return pokemonList;
     }
 
-    function add (pokemon) {        
-       pokemonList.push(pokemon);
+    function add (pokemon) { 
+        if (typeof pokemon === "object") {
+            pokemonList.push(pokemon);
+        } else {
+            document.write("Data type is not correct");
+        }       
+    }
+
+    function addListItem(pokemon) {
+        let pokemonListUl = document.querySelector(".pokemon-list");
+        let listItem = document.createElement("li");
+        let button = document.createElement("button");           
+        button.innerText = pokemon.name;
+        button.classList.add("button-class");
+        listItem.appendChild(button);
+        pokemonListUl.appendChild(listItem);
+        // Adding an event listener to the button //
+        button.addEventListener("click", function () {
+            showDetails(pokemon.name);
+        });
+    }
+    
+    // Creating a func showDetails() //
+    function showDetails(pokemon) {
+        console.log(pokemon);
     }
     
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        addListItem: addListItem,
+        // Adding a created func showDetails() //
+        showDetails: showDetails
     };    
 })();
 
+pokemonRepository.add({name: "Magneton", attack: 60, defense: 95, types: ["electric", "steel"]});
 
-function pokemonLoopFunction(pokemon) {           
-    if (pokemon.attack > 80) {        
-        document.write(pokemon.name + ' (attack: ' + pokemon.attack + ', defense: ' + pokemon.defense + ', types: ' + pokemon.types + ') is the most powerful pokemon of ' + pokemonRepository.getAll().length + '<br>'); 
-        } else {
-            document.write(pokemon.name + ' (attack: ' + pokemon.attack + ', defense: ' + pokemon.defense + ', types: ' + pokemon.types + ')<br>');
-        }
-}
-
-// pokemonRepository.getAll().forEach(pokemonLoopFunction);
-
-pokemonRepository.add({name: 'Magneton', attack: 60, defense: 95, types: ['electric', 'steel']});
-
-pokemonRepository.getAll().forEach(pokemonLoopFunction);
-
-
-// document.write(pokemonRepository.getAll());
-// pokemonRepository.add('RRR');
-// document.write(pokemonRepository.getAll());
+pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+});

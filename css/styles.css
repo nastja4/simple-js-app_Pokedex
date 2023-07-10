@@ -1,6 +1,32 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 2 version
+*/
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
-    color: rgb(49, 116, 116);
-    margin: 15px;
+    color: rgb(2, 77, 77);
+    margin: 20px;
+}
+
+.button-class {
+    display: inline-block; 
+    width: 100%;   
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid rgb(243, 82, 19);
+    border-radius: 4px;
+    background-color: rgb(245, 244, 242);
+    color: rgb(10, 92, 92);
+    margin: 3px 0px;
+    padding: 20px 15px;    
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
 }
