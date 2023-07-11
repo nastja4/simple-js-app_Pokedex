@@ -1,35 +1,14 @@
-
-// let pokemonList = [
-//     {name: 'Nidorino', attack: 72, defense: 57, types: ['poison']},
-//     {name: 'Ponyta', attack: 85, defense: 55, types: ['fire']},
-//     {name: 'Onix', attack: 45, defense: 160, types: ['rock', 'ground']},
-//     {name: 'Starmie', attack: 75, defense: 85, types: ['water', 'psychic']},
-//     {name: 'Umbreon', attack: 65, defense: 110, types: ['dark']}
-// ];
-
-// function printArrayDetails() {
-//     for (let i = 0; i < pokemonList.length; i++) {    
-//         if (pokemonList[i].attack > 80) {        
-//             document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ') is the most powerful pokemon of ' + pokemonList.length + '<br>'); 
-//             } else {
-//                 document.write(pokemonList[i].name + ' (attack: ' + pokemonList[i].attack + ' / defense: ' + pokemonList[i].defense + ')<br>');
-//             }
-//     }
-// }
-
-// printArrayDetails();
-
-
-
 let pokemonRepository = (function() {
-
-    let pokemonList = [
+    let pokemonList = [];
+    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+    
+    /*[
         {name: "Nidorino", attack: 72, defense: 57, types: ["poison"]},
         {name: "Ponyta", attack: 85, defense: 55, types: ["fire"]},
         {name: "Onix", attack: 45, defense: 160, types: ["rock", "ground"]},
         {name: "Starmie", attack: 75, defense: 85, types: ["water", "psychic"]},
         {name: "Umbreon", attack: 65, defense: 110, types: ["dark"]}
-    ]
+    ]*/
 
     function getAll () {
         return pokemonList;
@@ -52,27 +31,66 @@ let pokemonRepository = (function() {
         listItem.appendChild(button);
         pokemonListUl.appendChild(listItem);
         // Adding an event listener to the button //
-        button.addEventListener("click", function () {
-            showDetails(pokemon.name);
+        button.addEventListener("click", function() {
+            showDetails(pokemon);
+        });
+    }    
+    
+    // Creating a func loadList() //
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
+    // Creating a func loadDetails() //
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            // Now we add the details to the item
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+            // item.attack = details.attack;
+            // item.defense = details.defense;
+        }).catch(function (e) {
+            console.error(e);
         });
     }
-    
-    // Creating a func showDetails() //
-    function showDetails(pokemon) {
-        console.log(pokemon);
+
+    // Editing a func showDetails() //
+    function showDetails(item) {
+        loadDetails(item).then(function () {
+            console.log(item);
+        });
     }
-    
+
     return {
         getAll: getAll,
-        add: add,
+        add: add,        
         addListItem: addListItem,
-        // Adding a created func showDetails() //
+        loadList: loadList,
+        loadDetails: loadDetails,
         showDetails: showDetails
     };    
 })();
 
-pokemonRepository.add({name: "Magneton", attack: 60, defense: 95, types: ["electric", "steel"]});
+pokemonRepository.add({name: "Magneton", attack: 60, defense: 95, types: ["electric", "steel"] });
 
-pokemonRepository.getAll().forEach(function(pokemon) {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
