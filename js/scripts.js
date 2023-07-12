@@ -38,9 +38,12 @@ let pokemonRepository = (function() {
     
     // Creating a func loadList() //
     function loadList() {
+        showLoadingMessage();
         return fetch(apiUrl).then(function (response) {
+
             return response.json();
-        }).then(function (json) {
+        }).then(function (json) {            
+            hideLoadingMessage();
             json.results.forEach(function (item) {
                 let pokemon = {
                     name: item.name,
@@ -49,12 +52,14 @@ let pokemonRepository = (function() {
                 add(pokemon);
             });
         }).catch(function (e) {
+            hideLoadingMessage();
             console.error(e);
         })
     }
 
     // Creating a func loadDetails() //
     function loadDetails(item) {
+        showLoadingMessage();
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
             return response.json();
@@ -63,9 +68,11 @@ let pokemonRepository = (function() {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = details.types;
-            // item.attack = details.attack;
-            // item.defense = details.defense;
+            item.attack = details.attack;
+            item.defense = details.defense;
+            hideLoadingMessage();
         }).catch(function (e) {
+            hideLoadingMessage();
             console.error(e);
         });
     }
@@ -77,13 +84,23 @@ let pokemonRepository = (function() {
         });
     }
 
+    function showLoadingMessage() {
+        console.log("Data is loading...");
+    }
+
+    function hideLoadingMessage() {
+        console.log("Loaded!");
+    }
+
     return {
         getAll: getAll,
         add: add,        
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails,
-        showDetails: showDetails
+        showDetails: showDetails,
+        showLoadingMessage: showLoadingMessage,
+        hideLoadingMessage: hideLoadingMessage
     };    
 })();
 
