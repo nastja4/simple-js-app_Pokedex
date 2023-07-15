@@ -1,6 +1,7 @@
 let pokemonRepository = (function() {
     let pokemonList = [];
-    let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    // let modalContainer = document.querySelector("#modal-container");
     
     /*[
         {name: "Nidorino", attack: 72, defense: 57, types: ["poison"]},
@@ -15,23 +16,24 @@ let pokemonRepository = (function() {
     }
 
     function add (pokemon) { 
-        if (typeof pokemon === "object") {
+        if (typeof pokemon === 'object') {
             pokemonList.push(pokemon);
         } else {
-            document.write("Data type is not correct");
+            document.write('Data type is not correct');
         }       
     }
 
     function addListItem(pokemon) {
-        let pokemonListUl = document.querySelector(".pokemon-list");
-        let listItem = document.createElement("li");
-        let button = document.createElement("button");           
+        let pokemonListUl = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');           
         button.innerText = pokemon.name;
-        button.classList.add("button-class");
+        button.classList.add('button-class');
         listItem.appendChild(button);
         pokemonListUl.appendChild(listItem);
+        
         // Adding an event listener to the button //
-        button.addEventListener("click", function() {
+        button.addEventListener('click', function() {
             showDetails(pokemon);
         });
     }    
@@ -77,20 +79,79 @@ let pokemonRepository = (function() {
         });
     }
 
+
     // Editing a func showDetails() //
     function showDetails(item) {
         loadDetails(item).then(function () {
-            console.log(item);
+            showModal(pokemon); // Is (pokemon) here
         });
     }
-
+    
     function showLoadingMessage() {
-        console.log("Data is loading...");
+        console.log('Data is loading...');
+        alert('Data is loading...');
     }
 
     function hideLoadingMessage() {
-        console.log("Loaded!");
+        console.log('Loaded!');
+        alert('Loaded!');
     }
+
+
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
+        // Clear all existing modal content
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        // Add the new modal content
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = pokemon.name;
+
+        let contentElement = document.createElement('p');
+        contentElement.innerText = 'has a height' + pokemon.height;
+
+        let imageElement = document.createElement('img');
+        imageElement.setAttribute("src", pokemon.imageUrl);
+        // imageElement.src = pokemon.imageUrl; - is it correct?
+        imageElement.setAttribute("alt", "Pokemon logo");
+        imageElement.classList.add('Pokemon_logo');
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(contentElement);
+        modal.appendChild(imageElement);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+        modalContainer.classList.remove('is-visible');
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
+
+    modalContainer.addEventListener('click', (e) => {
+        // Close modal-window if the user clicks directly on the overlay
+        let target = e.target;
+        if (target === modalContainer) {
+            hideModal();
+        }
+    });
+
+
 
     return {
         getAll: getAll,
@@ -100,11 +161,13 @@ let pokemonRepository = (function() {
         loadDetails: loadDetails,
         showDetails: showDetails,
         showLoadingMessage: showLoadingMessage,
-        hideLoadingMessage: hideLoadingMessage
+        hideLoadingMessage: hideLoadingMessage,
+        showModal: showModal,
+        hideModal: hideModal
     };    
 })();
 
-pokemonRepository.add({name: "Magneton", attack: 60, defense: 95, types: ["electric", "steel"] });
+pokemonRepository.add({name: 'Magneton', attack: 60, defense: 95, types: ['electric', 'steel'] });
 
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
