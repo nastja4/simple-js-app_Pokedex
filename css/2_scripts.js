@@ -1,7 +1,7 @@
 let pokemonRepository = (function() {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-    let modalContainer = document.querySelector('#modal-container');
+    // let modalContainer = document.querySelector("#modal-container");
     
     /*[
         {name: "Nidorino", attack: 72, defense: 57, types: ["poison"]},
@@ -33,7 +33,7 @@ let pokemonRepository = (function() {
         pokemonListUl.appendChild(listItem);
         
         // Adding an event listener to the button //
-        button.addEventListener('click', function () {
+        button.addEventListener('click', function() {
             showDetails(pokemon);
         });
     }    
@@ -83,7 +83,7 @@ let pokemonRepository = (function() {
     // Editing a func showDetails() //
     function showDetails(item) {
         loadDetails(item).then(function () {
-            showModal(pokemon); // Is (pokemon) here?
+            showModal(pokemon); // Is (pokemon) here
         });
     }
     
@@ -98,7 +98,8 @@ let pokemonRepository = (function() {
     }
 
 
-    function showModal(pokemon) {        
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
         // Clear all existing modal content
         modalContainer.innerHTML = '';
 
