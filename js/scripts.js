@@ -69,9 +69,14 @@ let pokemonRepository = (function() {
             // Now we add the details to the item
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
-            item.types = details.types;
-            item.attack = details.attack;
-            item.defense = details.defense;
+            item.weight = details.weight;
+            if (details.types.length > 1) {
+                item.types = details.types[0].type.name + ', ' + details.types[1].type.name;
+            } else {
+                item.types = details.types[0].type.name;
+            }
+            item.attack = details.stats[1].base_stat;
+            item.defense = details.stats[2].base_stat;
             hideLoadingMessage();
         }).catch(function (e) {
             hideLoadingMessage();
@@ -83,18 +88,18 @@ let pokemonRepository = (function() {
     // Editing a func showDetails() //
     function showDetails(item) {
         loadDetails(item).then(function () {
-            showModal(pokemon); // Is (pokemon) here?
+            showModal(item); 
         });
     }
     
     function showLoadingMessage() {
         console.log('Data is loading...');
-        alert('Data is loading...');
+        // alert('Data is loading...');
     }
 
     function hideLoadingMessage() {
         console.log('Loaded!');
-        alert('Loaded!');
+        // alert('Loaded!');
     }
 
 
@@ -104,6 +109,8 @@ let pokemonRepository = (function() {
 
         let modal = document.createElement('div');
         modal.classList.add('modal');
+
+        showLoadingMessage();
 
         // Add the new modal content
         let closeButtonElement = document.createElement('button');
@@ -115,11 +122,10 @@ let pokemonRepository = (function() {
         titleElement.innerText = pokemon.name;
 
         let contentElement = document.createElement('p');
-        contentElement.innerText = 'has a height' + pokemon.height;
+        contentElement.innerText = 'Height: ' + pokemon.height + '\n Attack: ' + pokemon.attack + '\n Defense: ' + pokemon.defense + '\n Types: ' + pokemon.types;
 
         let imageElement = document.createElement('img');
         imageElement.setAttribute("src", pokemon.imageUrl);
-        // imageElement.src = pokemon.imageUrl; - is it correct?
         imageElement.setAttribute("alt", "Pokemon logo");
         imageElement.classList.add('Pokemon_logo');
 
