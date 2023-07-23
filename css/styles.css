@@ -69,6 +69,7 @@ ul {
     width: 100%;
     max-width: 500px;
     text-align: left;
+    border-radius: 4px;
 }
 
 .modal-close {
@@ -88,7 +89,7 @@ ul {
     margin-bottom: 0;
 }
 
-.Pokemon_logo {
+.modal img {
     width: 150px;
     height: 150px;
 }

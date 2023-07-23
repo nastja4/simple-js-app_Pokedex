@@ -110,24 +110,21 @@ let pokemonRepository = (function() {
         let modal = document.createElement('div');
         modal.classList.add('modal');
 
-        showLoadingMessage();
-
         // Add the new modal content
         let closeButtonElement = document.createElement('button');
         closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = 'Close';
+        closeButtonElement.innerText = 'Close'; // '&times'; (.innerHTML)
         closeButtonElement.addEventListener('click', hideModal);
 
         let titleElement = document.createElement('h1');
         titleElement.innerText = pokemon.name;
 
         let contentElement = document.createElement('p');
-        contentElement.innerText = 'Height: ' + pokemon.height + '\n Attack: ' + pokemon.attack + '\n Defense: ' + pokemon.defense + '\n Types: ' + pokemon.types;
+        contentElement.innerText = 'Height: ' + pokemon.height + '\n Weight: ' + pokemon.weight + '\n Attack: ' + pokemon.attack + '\n Defense: ' + pokemon.defense + '\n Types: ' + pokemon.types;
 
         let imageElement = document.createElement('img');
         imageElement.setAttribute("src", pokemon.imageUrl);
         imageElement.setAttribute("alt", "Pokemon logo");
-        imageElement.classList.add('Pokemon_logo');
 
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
@@ -142,6 +139,7 @@ let pokemonRepository = (function() {
         modalContainer.classList.remove('is-visible');
     }
 
+    // Close modal-window with Escape
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
             hideModal();
