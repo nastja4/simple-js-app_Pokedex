@@ -9,5 +9,10 @@ body {
     border-radius: 4px;
     background-color: rgb(245, 244, 242);
     color: rgb(10, 92, 92);
-    padding: 20px 15px;   
+    padding: 20px 15px;  
+    /* background-image: linear-gradient(to bottom right, rgb(243, 82, 19), rgb(245, 244, 242)); */
+}
+
+.modal-content {
+    background-image: linear-gradient(to bottom right, rgb(231, 174, 151), rgb(245, 244, 242));
 }

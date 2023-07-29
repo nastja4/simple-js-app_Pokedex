@@ -29,20 +29,25 @@ let pokemonRepository = (function() {
         listItem.classList.add('list-group-item', 'border-0', 'py-1', 'px-0');
         
         let button = document.createElement('button');
-        button.innerText = pokemon.name;
-
         // Button trigger modal //
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#exampleModal');
-        button.classList.add('btn-info', 'text-capitalize', 'fs-16', 'text-left', 'w-100', 'font-weight-bold');             
-
-        listItem.appendChild(button);
-        pokemonListUl.appendChild(listItem);
-        
+        button.classList.add('btn-info', 'text-capitalize', 'fs-16', 'text-left', 'w-100', 'font-weight-bold');
         // Adding an event listener to the button //
         button.addEventListener('click', function () {
             showDetails(pokemon);
         });
+
+        button.innerText = pokemon.name; 
+
+        let buttonPokemonImg = document.createElement('img');
+        buttonPokemonImg.classList.add('buttonPokemonImg');
+        buttonPokemonImg.src = pokemon.imageUrl;
+                     
+        button.appendChild(buttonPokemonImg);
+
+        listItem.appendChild(button); // 
+        pokemonListUl.appendChild(listItem);        
     }    
     
     // Creating a func loadList() //
@@ -157,7 +162,8 @@ let pokemonRepository = (function() {
     };    
 })();
 
-pokemonRepository.add({name: 'Magneton', attack: 60, defense: 95, types: ['electric', 'steel'] });
+// Adding pokemon //
+// pokemonRepository.add({name: 'Magneton', attack: 60, defense: 95, types: ['electric', 'steel'] });
 
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function(pokemon) {
