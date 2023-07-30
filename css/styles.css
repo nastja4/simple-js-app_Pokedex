@@ -1,5 +1,5 @@
-html,
-body {    
+head,
+body {
     color: rgb(2, 77, 77);
     margin: auto 7%;
 }
@@ -9,10 +9,16 @@ body {
     border-radius: 4px;
     background-color: rgb(245, 244, 242);
     color: rgb(10, 92, 92);
-    padding: 20px 15px;  
-    /* background-image: linear-gradient(to bottom right, rgb(243, 82, 19), rgb(245, 244, 242)); */
+    padding: 2px 15px;    
 }
 
 .modal-content {
-    background-image: linear-gradient(to bottom right, rgb(231, 174, 151), rgb(245, 244, 242));
+    background-image: linear-gradient(to bottom right, rgb(182, 216, 221), rgb(245, 244, 242));
+    color: rgb(250, 73, 4);
+    border-radius: 10px;
+}
+
+.buttonPokemonImg {
+    width: 60px;
+    height: 60px;
 }

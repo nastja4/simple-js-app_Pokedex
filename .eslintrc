@@ -7,6 +7,8 @@
         "eslint:recommended"
     ],
     "rules": {
-        "quotes": ["warn", "double"]
+        "semi": ["error", "always"],
+        "quotes": ["warn", "double"],
+        "no-unused-vars": "warn"
     }
 }
