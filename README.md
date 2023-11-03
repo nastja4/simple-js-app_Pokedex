@@ -20,14 +20,14 @@ Screenshots:
 ## How to Use
 To explore the Pokédex app, you can either visit the live version hosted on GitHub Pages:
 
-[JavaScript Pokédex App](https://yourusername.github.io/pokedex-app)
+[JavaScript Pokédex App](https://nastja4.github.io/simple-js-app_Pokedex/)
 
 Or, you can clone this repository to your local machine and open the `index.html` file in your browser.
 
 ```bash
 git clone https://github.com/yourusername/pokedex-app.git
 cd pokedex-app
-
+```
 
 ## Technologies Used
 - HTML
