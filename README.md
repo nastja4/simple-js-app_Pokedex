@@ -37,10 +37,21 @@ cd pokedex-app
 - Bootstrap for enhanced styling
 - ESLint for code formatting
 
-## Libraries and frameworks:
-- Bootstrap
-- jQuery
-- Polyfill
+### Libraries and frameworks:
+- [Bootstrap](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+
+Bootstrap is a popular open-source CSS framework that provides a collection of pre-designed, responsive design components and layouts. It simplifies the process of creating visually appealing and mobile-friendly web pages. It includes CSS, JavaScript, and a grid system, making it easy to build modern web applications.
+
+
+- [jQuery](https://jquery.com/)
+
+jQuery is a fast and lightweight JavaScript library that simplifies the process of manipulating HTML documents, handling events, creating animations, and making asynchronous requests to a server. It's known for its ease of use and cross-browser compatibility.
+
+- [Polyfill](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)
+
+A polyfill, short for "polymer fill," is a piece of code or a library that provides modern functionality in older web browsers that do not support it natively. Polyfills bridge the gap between older and newer browser features, ensuring that your web applications work consistently across different browsers.
+
+As polyfills can vary depending on the specific feature you want to support, you may need to look for polyfills that match your project's requirements. A popular source for polyfills is MDN Web Docs.
 
 ## Contributing
 Contributions to this project are welcome. If you have any improvements or new features to suggest, please open an issue or submit a pull request.
