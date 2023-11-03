@@ -9,6 +9,12 @@ Screenshots:
 
 <img src="https://github.com/nastja4/simple-js-app_Pokedex/assets/126527606/f8762452-a3bb-4040-8da7-b5db77e72ecd" alt="Screenshot 2" width="600px">
 
+## Table of Contents
+- [Features](#features)
+- [How to Use](#how-to-use)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- 
 ## Features
 - Load data from the Pokémon API.
 - Display a list of Pokémon.
